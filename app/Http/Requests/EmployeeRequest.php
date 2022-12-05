@@ -23,7 +23,7 @@ class EmployeeRequest extends ApiRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules() :array
     {
         return [
             'first_name' => 'required|max:255',
