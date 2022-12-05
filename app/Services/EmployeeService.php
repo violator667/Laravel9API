@@ -43,7 +43,7 @@ class EmployeeService extends ApiService
     public function index() :JsonResponse
     {
         $this->setJsonError(false);
-        $this->setJsonData($this->model->get());
+        $this->setJsonData($this->model->with('company')->get());
         $this->setJsonMessage(__('All '. strtolower($this->model_name_plural) .' retrieved.'));
         return $this->returnJsonResponse();
     }
