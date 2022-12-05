@@ -25,12 +25,12 @@ class EmployeeRequest extends ApiRequest
      */
     public function rules()
     {
-//        dd('aaaaa');
         return [
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'phone_number' => 'nullable|numeric',
             'email' => 'required|email',
+            'company_id' => 'required'
         ];
     }
 }
