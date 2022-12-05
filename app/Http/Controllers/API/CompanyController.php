@@ -12,12 +12,6 @@ use App\Http\Requests\CompanyUpdateRequest;
 
 class CompanyController extends ApiController
 {
-
-    /**
-     * @var object|CompanyService
-     */
-    private object $controllerService;
-
     /**
      * Set Service
      *
@@ -60,7 +54,6 @@ class CompanyController extends ApiController
         return $this->controllerService->show($id);
     }
 
-
     /**
      * Update the specified resource in storage.
      *
@@ -82,26 +75,5 @@ class CompanyController extends ApiController
     public function destroy(int $id) :JsonResponse
     {
         return $this->controllerService->destroy($id);
-    }
-
-    /**
-     * Show edit form
-     *
-     * @param  int  $id
-     * @return JsonResponse
-     */
-    public function edit(int $id) :JsonResponse
-    {
-        return $this->controllerService->notSupported();
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return JsonResponse
-     */
-    public function create() :JsonResponse
-    {
-        return $this->controllerService->notSupported();
     }
 }

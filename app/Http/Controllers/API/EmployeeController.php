@@ -15,11 +15,6 @@ use Illuminate\Http\Request;
 class EmployeeController extends ApiController
 {
     /**
-     * @var object|EmployeeService
-     */
-    private object $controllerService;
-
-    /**
      * EmployeeController constructor.
      * @param EmployeeService $service
      */
@@ -36,16 +31,6 @@ class EmployeeController extends ApiController
     public function index() :JsonResponse
     {
         return $this->controllerService->index();
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return JsonResponse
-     */
-    public function create() :JsonResponse
-    {
-        return $this->controllerService->notSupported();
     }
 
     /**
@@ -68,17 +53,6 @@ class EmployeeController extends ApiController
     public function show(int $id) :JsonResponse
     {
         return $this->controllerService->show($id);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return JsonResponse
-     */
-    public function edit(int $id) :JsonResponse
-    {
-        return $this->controllerService->notSupported();
     }
 
     /**
