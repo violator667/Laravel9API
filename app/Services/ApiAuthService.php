@@ -8,11 +8,9 @@ use App\Http\Requests\UserRegisterRequest;
 use App\Models\User as User;
 use App\Services\ApiService as ApiService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+
 
 class ApiAuthService extends ApiService
 {
@@ -45,7 +43,6 @@ class ApiAuthService extends ApiService
             return $this->returnJsonResponse();
         }
         $user = $this->model->where('email', $request->email)->first();
-//        $this->model->createToken('a')->plainTextToken
         $token = $user->createToken('my api token')->plainTextToken;
         $this->setJsonData($token);
         $this->setJsonError(false);
