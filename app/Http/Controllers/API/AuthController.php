@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Services\ApiAuthService;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class AuthController extends Controller
 {
@@ -17,12 +17,12 @@ class AuthController extends Controller
         $this->controllerService = $service;
     }
 
-    public function createUser(UserRegisterRequest $request)
+    public function createUser(UserRegisterRequest $request) :JsonResponse
     {
         return $this->controllerService->createUser($request);
     }
 
-    public function loginUser(UserLoginRequest $request)
+    public function loginUser(UserLoginRequest $request) :JsonResponse
     {
         return $this->controllerService->loginUser($request);
     }
