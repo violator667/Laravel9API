@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
+
     protected $fillable = [
         'first_name',
         'last_name',
@@ -18,6 +19,9 @@ class Employee extends Model
         'updated_at'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function company()
     {
         return $this->belongsTo('App\Models\Company');

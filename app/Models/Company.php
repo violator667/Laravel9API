@@ -19,6 +19,9 @@ class Company extends Model
       'updated_at'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function employees()
     {
         return $this->hasMany('App\Models\Employee');
