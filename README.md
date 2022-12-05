@@ -25,9 +25,9 @@ Once you have your account you can:
 
 `Employees end points`
 
-    GET api/employee           - show all employees
-    POST api/employee          - add new employee
-    PUT api/employee/{id}      - update existing employee
-    DELETE api/employee/{id}   - delete extisting employee
+    GET api/employees           - show all employees
+    POST api/employees          - add new employee
+    PUT api/employees/{id}      - update existing employee
+    DELETE api/employees/{id}   - delete extisting employee
 
 `Laravel edit & create form views are not supported!`
