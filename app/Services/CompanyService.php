@@ -16,8 +16,17 @@ use App\Services\ApiService as ApiService;
  */
 class CompanyService extends ApiService
 {
+    /**
+     * @var object|Company
+     */
     private object $model;
+    /**
+     * @var string
+     */
     private string $model_name_singular = "Company";
+    /**
+     * @var string
+     */
     private string $model_name_plural = "Companies";
 
     /**
@@ -29,6 +38,10 @@ class CompanyService extends ApiService
         $this->model = $company;
     }
 
+    /**
+     * @param CompanyRequest $request
+     * @return JsonResponse
+     */
     public function store(CompanyRequest $request) :JsonResponse
     {
         if($this->model::where('nip', $request->nip)->count()===0)
@@ -46,14 +59,21 @@ class CompanyService extends ApiService
         return $this->returnJsonResponse();
     }
 
+    /**
+     * @return JsonResponse
+     */
     public function index() :JsonResponse
     {
         $this->setJsonError(false);
-        $this->setJsonData($this->model->with('employees')->get());
+        $this->setJsonData($this->model::with('employees')->get());
         $this->setJsonMessage(__('All '. strtolower($this->model_name_plural) .' retrieved.'));
         return $this->returnJsonResponse();
     }
 
+    /**
+     * @param int $id
+     * @return JsonResponse
+     */
     public function show(int $id) :JsonResponse
     {
         if(!$this->findModelOrFail($id)) {
@@ -65,6 +85,11 @@ class CompanyService extends ApiService
         return $this->returnJsonResponse();
     }
 
+    /**
+     * @param CompanyUpdateRequest $request
+     * @param int $id
+     * @return JsonResponse
+     */
     public function update(CompanyUpdateRequest $request, int $id) :JsonResponse
     {
         if(!$this->findModelOrFail($id)) {
@@ -79,6 +104,10 @@ class CompanyService extends ApiService
 
     }
 
+    /**
+     * @param int $id
+     * @return JsonResponse
+     */
     public function destroy(int $id) :JsonResponse
     {
         $model = $this->findModelOrFail($id);
@@ -99,10 +128,13 @@ class CompanyService extends ApiService
         return $this->returnJsonResponse();
     }
 
+    /**
+     * @param int $id
+     * @return Company|null
+     */
     private function findModelOrFail(int $id): Company|null
     {
-
-        $model = $this->model->with('employees')->find($id);
+        $model = $this->model::with('employees')->find($id);
         if($model)
         {
             return $model;

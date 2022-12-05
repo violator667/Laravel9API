@@ -16,8 +16,17 @@ use Illuminate\Http\Request;
  */
 class EmployeeService extends ApiService
 {
+    /**
+     * @var object|Employee
+     */
     private object $model;
+    /**
+     * @var string
+     */
     private string $model_name_singular = "Employee";
+    /**
+     * @var string
+     */
     private string $model_name_plural = "Employees";
 
     /**
@@ -29,6 +38,10 @@ class EmployeeService extends ApiService
         $this->model = $employee;
     }
 
+    /**
+     * @param EmployeeRequest $request
+     * @return JsonResponse
+     */
     public function store(EmployeeRequest $request) :JsonResponse
     {
 
@@ -40,14 +53,21 @@ class EmployeeService extends ApiService
         return $this->returnJsonResponse();
     }
 
+    /**
+     * @return JsonResponse
+     */
     public function index() :JsonResponse
     {
         $this->setJsonError(false);
-        $this->setJsonData($this->model->with('company')->get());
+        $this->setJsonData($this->model::with('company')->get());
         $this->setJsonMessage(__('All '. strtolower($this->model_name_plural) .' retrieved.'));
         return $this->returnJsonResponse();
     }
 
+    /**
+     * @param int $id
+     * @return JsonResponse
+     */
     public function show(int $id) :JsonResponse
     {
         if(!$this->findModelOrFail($id)) {
@@ -59,6 +79,11 @@ class EmployeeService extends ApiService
         return $this->returnJsonResponse();
     }
 
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
+     */
     public function update(Request $request, int $id) :JsonResponse
     {
         if(!$this->findModelOrFail($id)) {
@@ -73,6 +98,10 @@ class EmployeeService extends ApiService
 
     }
 
+    /**
+     * @param int $id
+     * @return JsonResponse
+     */
     public function destroy(int $id) :JsonResponse
     {
         $model = $this->findModelOrFail($id);
@@ -87,9 +116,12 @@ class EmployeeService extends ApiService
         return $this->returnJsonResponse();
     }
 
+    /**
+     * @param int $id
+     * @return Employee|null
+     */
     private function findModelOrFail(int $id): Employee|null
     {
-
         $model = $this->model->find($id);
         if($model)
         {
