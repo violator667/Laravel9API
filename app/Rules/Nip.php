@@ -4,6 +4,10 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
+/**
+ * Class Nip
+ * @package App\Rules
+ */
 class Nip implements Rule
 {
     /**
@@ -19,15 +23,15 @@ class Nip implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
-     * @param  mixed  $value
+     * @param string $attribute
+     * @param mixed $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value) :bool
     {
         $value = preg_replace('/[^0-9]+/', '', $value);
 
-        if (strlen($value) !== 10)
+        if(strlen($value) !== 10)
         {
             return false;
         }
@@ -35,7 +39,7 @@ class Nip implements Rule
         $arrSteps = array(6, 5, 7, 2, 3, 4, 5, 6, 7);
         $intSum = 0;
 
-        for ($i = 0; $i < 9; $i++)
+        for($i = 0; $i < 9; $i++)
         {
             $intSum += $arrSteps[$i] * $value[$i];
         }
@@ -43,7 +47,7 @@ class Nip implements Rule
         $int = $intSum % 11;
         $intControlNr = $int === 10 ? 0 : $int;
 
-        if ($intControlNr == $value[9])
+        if($intControlNr === $value[9])
         {
             return true;
         }
@@ -55,10 +59,10 @@ class Nip implements Rule
     /**
      * Get the validation error message.
      *
-     * @return string
+     * @return string|array
      */
-    public function message()
+    public function message() :string|array
     {
-        return __('NIP is invalid!');
+        return __('Nip is invalid');
     }
 }
